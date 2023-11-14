@@ -1,0 +1,82 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+
+<div class="container d-flex container-signin my-4 rounded-3">
+  <div class="article p-3 my-3 d-flex flex-column justify-content-between">
+    <div class="title d-flex justify-content-center">
+      <div class="row d-flex justify-content-center mt-5">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="login rounded-3 p-3 d-flex flex-column align-items-center bg-dark text-bg-dark">
+          <div class="inner-title">
+            <h1 class="text-white">BusTracker</h1>
+          </div>
+          <div class="motorcicle_container mb-4">
+            <img src="{% static 'images/waiting.svg'%}" width="500" alt="">
+          </div>
+          <div class="col-md-6 col-sm-12">
+            {% if error%}
+            <div id="opened-alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+              <div>{{error}}</div>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="close"></button>
+            </div>
+            {% else %} {% endif %}
+            <h4 class="fw-bolder">Ingrese a su cuenta</h4>
+            <form action="/login/" method="POST">
+              {% csrf_token %}
+              <div class="input">
+                <input
+                  type="text"
+                  class="rounded-3"
+                  required
+                  {{form.username}}
+                <span>Email</span>
+              </div>
+
+              <div class="input" id="input-2">
+                <input
+                  type="password"
+                  class="rounded-3"
+                  required
+                  {{form.password}}
+                <span>Contraseña</span>
+              </div>
+              <span class="text-end"
+                ><a href="" >Olvidé mi contraseña</a></span>
+              <!-- <button type="submit">Login</button> -->
+              <input
+                type="submit"
+                class="button fw-medium fs-5 rounded-3 mt-3"
+                value="INICIAR SESIÓN"
+                id="inicio-sesion"
+              />
+            </form>
+            <div id="box-others-login">
+              <hr id="hr-others-login" />
+              <p id="others-login">O inice sesión con</p>
+            </div>
+            <div
+              class="btn-group mb-3"
+              role="group"
+              aria-label="Basic example"
+              id="others-login-btn"
+            >
+              <button type="button" class="btn text-white">
+                <i class="bi bi-google"></i> Google
+              </button>
+              <button type="button" class="btn">
+                <i class="bi bi-apple"></i> Apple ID
+              </button>
+            </div>
+            <p class="text-center" id="no-account">
+              No tengo cuenta, <a href="/register">crear una</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

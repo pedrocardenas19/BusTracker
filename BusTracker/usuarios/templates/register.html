@@ -1,0 +1,89 @@
+{% extends 'base.html' %} {% load static%} {% block content %}
+
+<!-- <div class="container">
+  <h1>Signup</h1>
+
+  {{error}}
+
+  <form action="/signup/" method="POST">
+    {% csrf_token %} {{form.as_p}}
+    <button class="btn btn-primary">Signup</button>
+  </form>
+</div> -->
+
+<div class="container d-flex container-signin my-4 rounded-3">
+  <div class="article p-3 my-3 d-flex flex-column justify-content-between">
+    <div class="title d-flex justify-content-center">
+      <div class="row d-flex justify-content-center mt-5">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col px-3">
+        <div class="login rounded-3 p-3 d-flex flex-column align-items-center bg-dark text-bg-dark">
+          <div class="inner-title mb-4">
+            <h1 class="text-white text-center">BusTracker</h1>
+            <div class="motorcicle_container">
+              <img src="{% static 'images/waiting.svg'%}" width="500" alt="">
+            </div>
+          </div>
+          <div class="motorcicle_container">
+            
+          </div>
+          <div class="col-md-6 col-sm-12">
+            {% if error%}
+            <div id="opened-alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+              <div>{{error}}</div>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="close"></button>
+            </div>
+            {% else %} {% endif %}
+            <h4 class="fw-bolder">Crear una cuenta</h4>
+            <form action="/register/" method="POST">
+              {% csrf_token %}
+              <div class="input">
+                <input
+                  type="text"
+                  class="rounded-3"
+                  required
+                  {{form.username}}
+                <span>Email</span>
+              </div>
+
+              <div class="input" id="input-2">
+                <input
+                  type="password"
+                  class="rounded-3"
+                  required
+                  {{form.password1}}
+                <span>Contraseña</span>
+              </div>
+
+              <div class="input" id="input-2">
+                <input
+                  type="password"
+                  class="rounded-3"
+                  required
+                  {{form.password2}}
+                <span>Repetir Contraseña</span>
+              </div>
+              <input
+                type="submit"
+                class="button fw-medium fs-5 rounded-3 mt-3"
+                value="CREAR CUENTA"
+                id="inicio-sesion"
+              />
+            </form>
+            <div id="box-others-login">
+              <hr id="hr-others-login" />
+              <p id="others-login">O inice sesión</p>
+            </div>
+            <p class="text-center" id="no-account">
+              Ya tengo cuenta, <a href="/login">iniciar sesión</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
