@@ -1,5 +1,53 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-<div class="container">
-  <h1>Hola mundo</h1>
+<div class="container d-flex container-signin my-4 rounded-3">
+  <div class="article p-3 my-3 d-flex flex-column justify-content-between">
+    <div class="title d-flex justify-content-center">
+      <div class="row d-flex justify-content-center mt-5">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="login rounded-3 p-3 d-flex flex-column align-items-center bg-dark text-bg-dark">
+          <div class="inner-title">
+            <h1 class="text-white">BusTracker</h1>
+          </div>
+          <div class="motorcicle_container mb-4">
+            <img src="{% static 'images/waiting.svg'%}" width="500" alt="">
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <header>
+              <h1>Bus Tracker</h1>
+              <p>Encuentra la ruta adecuada con nuestro sistema de seguimiento de autobuses.</p>
+          </header>
+          
+          <section>
+              <h2>¿Qué es Bus Tracker?</h2>
+              <p>
+                  Bus Tracker es una herramienta innovadora que te ayuda a determinar qué autobús debes tomar
+                  mediante el análisis de datos en tiempo real y un modelo de lenguaje avanzado.
+              </p>
+          </section>
+          
+          <section>
+              <h2>¿Cómo Funciona?</h2>
+              <p>
+                  Nuestro sistema utiliza un avanzado modelo de lenguaje que analiza información en tiempo real
+                  sobre la ubicación y el movimiento de los autobuses. Al ingresar tu destino y preferencias,
+                  recibirás recomendaciones claras sobre qué autobús tomar y cuándo hacerlo.
+              </p>
+          </section>
+          
+          
+          
+          <footer>
+              <p>&copy; 2023 Bus Tracker. Todos los derechos reservados.</p>
+          </footer>
+             
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

@@ -27,6 +27,8 @@ urlpatterns = [
     path('register/', views_usuarios.register , name='register'),
     path('logout/', views_usuarios.user_logout , name='logout'),
     path('chatbot/', views_usuarios.chatbot , name='chatbot'),
+    path('changepassword/', views_usuarios.change_password , name='chatbot'),
+
 
 
 

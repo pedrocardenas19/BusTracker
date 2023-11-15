@@ -21,6 +21,17 @@ from .forms import  CustomPasswordChangeForm
 from django.http import JsonResponse
 import openai
 
+
+
+from datetime import datetime
+from datetime import timedelta
+import time
+
+import responses
+
+import googlemaps
+
+
 # Create your views here.
 
 def home(request):
@@ -156,14 +167,15 @@ def manejar_error_autenticacion(request, form, template_name, mensaje_error):
 
 # Create your views here.
 
-open_ai_key = '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'
+open_ai_key = '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'
+
 
 openai.api_key = open_ai_key
 
 def ask_openai(message):
     response = openai.Completion.create( 
         model = 'text-davinci-003',
-        prompt =  "Identifica la ubicación a la cual se quiere dirigir el usuario en el siguiente mensaje y devuelvela sola para poder ingresarla en la Api de GCP"+message,
+        prompt =  "Identifica la ubicación a la cual se quiere dirigir el usuario en el siguiente mensaje y devuelvela sola para poder ingresarla en la Api de GCP de lamanera mas especifica posible"+message,
         max_tokens = 150,
         n = 1,
         stop = None,
@@ -177,8 +189,35 @@ def chatbot(request):
     if request.method == 'POST':
         message = request.POST.get('message')
         response = ask_openai(message)
-        return JsonResponse({'message': message, 'response': response})
+        return JsonResponse({'response': response})
     return render(request, 'chatbot.html')
 
+
+
+
+###################################################
+
+@responses.activate
+def direction(self, destination):
+        responses.add(
+            responses.GET,
+            "https://maps.googleapis.com/maps/api/directions/json",
+            body='{"status":"OK","routes":[]}',
+            status=200,
+            content_type="application/json",
+        )
+
+        now = datetime.now()
+        routes = self.client.directions(
+            "Brooklyn", destination, mode="transit", departure_time=now
+        )
+
+        self.assertEqual(1, len(responses.calls))
+        self.assertURLEqual(
+            "https://maps.googleapis.com/maps/api/directions/json?"
+            "origin=Brooklyn&key=%s&destination=Queens&mode=transit&"
+            "departure_time=%d" % (self.key, time.mktime(now.timetuple())),
+            responses.calls[0].request.url,
+        )
 
 
