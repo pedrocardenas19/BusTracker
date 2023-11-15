@@ -20,6 +20,7 @@ from django.core.mail import EmailMessage
 from .forms import  CustomPasswordChangeForm
 from django.http import JsonResponse
 import openai
+import geocoder
 
 
 
@@ -31,7 +32,7 @@ import responses
 
 import googlemaps
 
-
+destination  = ''
 # Create your views here.
 
 def home(request):
@@ -167,7 +168,7 @@ def manejar_error_autenticacion(request, form, template_name, mensaje_error):
 
 # Create your views here.
 
-open_ai_key = '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'
+open_ai_key = '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'
 
 
 openai.api_key = open_ai_key
@@ -189,11 +190,17 @@ def chatbot(request):
     if request.method == 'POST':
         message = request.POST.get('message')
         response = ask_openai(message)
+        loc = response
+        destination = geocoder.osm(loc)
+        print(destination)
         return JsonResponse({'response': response})
     return render(request, 'chatbot.html')
 
 
 
+
+def mapa(request):
+    return render(request, 'mapa.html', {'destination':destination})
 
 ###################################################
 

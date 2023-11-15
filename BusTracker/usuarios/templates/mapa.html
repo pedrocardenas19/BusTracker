@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends "base.html" %} {% load static %} {% block content %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title> Document</title>
+        <link rel="stylesheet" href="{% static 'index.css' %}">
+    </head>
+    <body>
+        <button id="button">Mostrar Mi Ubicacion</button>
+        <button id="button2">Mostrar Paradero</button>
+        <button id="button3">Mostrar Bus</button>
+        <div id="mapDiv"></div>
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwi7DLBwQd4ObwriUw5bo1vGmNzisxV5I&callback=initpam"
+            defer
+        ></script>
+        <script src="{% static 'index.js' %}"></script>
+        <div id="destination" style="display: none;">{{ destination }}</div>
+    </body>
+</html>
+{% endblock %}
